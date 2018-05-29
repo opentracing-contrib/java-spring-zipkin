@@ -95,3 +95,22 @@ of type `ZipkinTracerCustomizer`
 
 In a high traffic environment, the default sampler that is configured is very unsafe since it samples every request.
 It is therefore highly recommended to explicitly configure on of the other options in a production environment
+
+## Development
+Maven checkstyle plugin is used to maintain consistent code style based on [Google Style Guides](https://github.com/google/styleguide)
+
+```shell
+./mvnw clean install
+```
+
+## Release
+Follow instructions in [RELEASE](RELEASE.md)
+
+   [ci-img]: https://travis-ci.org/opentracing-contrib/java-spring-zipkin.svg?branch=master
+   [ci]: https://travis-ci.org/opentracing-contrib/java-spring-zipkin
+   [maven-img]: https://img.shields.io/maven-central/v/io.opentracing.contrib/java-spring-zipkin.svg?maxAge=2592000
+   [maven]: http://search.maven.org/#search%7Cga%7C1%7Cjava-spring-zipkin
+
+## License
+
+[Apache 2.0 License](./LICENSE).
