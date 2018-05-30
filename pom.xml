@@ -19,7 +19,7 @@
 
   <groupId>io.opentracing.contrib</groupId>
   <artifactId>opentracing-spring-zipkin-parent</artifactId>
-  <version>0.1.1</version>
+  <version>0.1.2-SNAPSHOT</version>
   <modules>
     <module>opentracing-spring-zipkin-starter</module>
     <module>opentracing-spring-zipkin-starter-it</module>
@@ -34,7 +34,7 @@
     <url>https://github.com/opentracing-contrib/java-spring-zipkin</url>
     <connection>scm:git:https://github.com/opentracing-contrib/java-spring-zipkin.git</connection>
     <developerConnection>scm:git:https://github.com/opentracing-contrib/java-spring-zipkin.git</developerConnection>
-    <tag>0.1.1</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <licenses>
