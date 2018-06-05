@@ -109,7 +109,7 @@ Follow instructions in [RELEASE](RELEASE.md)
    [ci-img]: https://travis-ci.org/opentracing-contrib/java-spring-zipkin.svg?branch=master
    [ci]: https://travis-ci.org/opentracing-contrib/java-spring-zipkin
    [maven-img]: https://img.shields.io/maven-central/v/io.opentracing.contrib/java-spring-zipkin.svg?maxAge=2592000
-   [maven]: http://search.maven.org/#search%7Cga%7C1%7Copentracing-spring-jaeger-starter
+   [maven]: http://search.maven.org/#search%7Cga%7C1%7Copentracing-spring-zipkin-starter
 
 ## License
 
