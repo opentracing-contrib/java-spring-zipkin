@@ -72,7 +72,7 @@ By default starter configures `AsyncRepoter` using `OkHttpSender` with `JSON_V2`
 Following properties can be changed to configure the reporter.
 
 * `opentracing.zipkin.http-sender.encoder` - encoding of spans e.g. `JSON_V1`, `JSON_V2`, `PROTO3`
-* `opentracing.zipkin.http-sernder.baseUrl` - set base url e.g. `http://zipkin:9411/`
+* `opentracing.zipkin.http-sender.baseUrl` - set base url e.g. `http://zipkin:9411/`
 
 ## Advanced cases
 
