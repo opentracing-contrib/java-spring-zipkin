@@ -23,7 +23,7 @@
     <version>0.1.2-SNAPSHOT</version>
   </parent>
 
-  <artifactId>opentracing-spring-zipkin-starter-it</artifactId>
+  <artifactId>opentracing-spring-zipkin-web-starter-it</artifactId>
 
   <properties>
     <main.basedir>${project.basedir}/..</main.basedir>
@@ -32,15 +32,8 @@
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>opentracing-spring-zipkin-starter</artifactId>
+      <artifactId>opentracing-spring-zipkin-web-starter</artifactId>
       <version>${project.version}</version>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>io.opentracing.contrib</groupId>
-      <artifactId>opentracing-spring-web-autoconfigure</artifactId>
-      <version>0.3.2</version>
       <scope>test</scope>
     </dependency>
 
