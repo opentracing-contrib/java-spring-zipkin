@@ -43,7 +43,7 @@ import zipkin2.reporter.okhttp3.OkHttpSender;
 @ConditionalOnClass(brave.opentracing.BraveTracer.class)
 @ConditionalOnMissingBean(io.opentracing.Tracer.class)
 @ConditionalOnProperty(value = "opentracing.zipkin.enabled", havingValue = "true", matchIfMissing = true)
-@AutoConfigureBefore(name = "io.opentracing.contrib.spring.web.autoconfig.TracerAutoConfiguration")
+@AutoConfigureBefore(io.opentracing.contrib.spring.tracer.configuration.TracerAutoConfiguration.class)
 @EnableConfigurationProperties(ZipkinConfigurationProperties.class)
 public class ZipkinAutoConfiguration {
 
