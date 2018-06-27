@@ -1,15 +1,38 @@
 [![Build Status][ci-img]][ci] [![Released Version][maven-img]][maven]
 
+## Dependencies
+
+The `opentracing-spring-zipkin-starter` simply contains the code needed to provide a Zipkin implementation of the OpenTracing's `io.opentracing.Tracer`
+interface.
+
+For a project to be able to actually instrument a Spring stack, one or more of the purpose built starters (like `io.opentracing.contrib:opentracing-spring-web-starter` or `io.opentracing.contrib:opentracing-spring-cloud-starter`)  
+would also have to be included in the POM.
+
+The `opentracing-spring-zipkin-web-starter` starter is convenience starter that includes both `opentracing-spring-zipkin-starter` and `opentracing-spring-web-starter`
+This means that by including it, simple web Spring Boot microservices include all the necessary dependencies to instrument Web requests / responses and send traces to Zipkin.
+
+The `opentracing-spring-zipkin-cloud-starter` starter is convenience starter that includes both `opentracing-spring-zipkin-starter` and `opentracing-spring-cloud-starter`
+This means that by including it, all parts of the Spring Cloud stack supported by Opentracing will be instrumented
+
 ## Configuration
 
 ```xml
 <dependency>
   <groupId>io.opentracing.contrib</groupId>
-  <artifactId>opentracing-spring-zipkin-starter</artifactId>
+  <artifactId>opentracing-spring-zipkin-web-starter</artifactId>
 </dependency>
 ```
 
-The dependency will ensure that Spring Boot will auto configure a Zipkin implementation of OpenTracing's `Tracer` when the application starts.
+or
+
+```xml
+<dependency>
+  <groupId>io.opentracing.contrib</groupId>
+  <artifactId>opentracing-spring-zipkin-cloud-starter</artifactId>
+</dependency>
+``` 
+
+Either dependency will ensure that Spring Boot will auto configure a Zipkin implementation of OpenTracing's `Tracer` when the application starts.
 
 By default, the Zipkin server is expected to collect traces at `http://localhost:9411/api/v2/spans`
 encoded with `JSON_V2`. 
