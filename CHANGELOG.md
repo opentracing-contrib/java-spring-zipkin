@@ -1,10 +1,15 @@
 Changes by Version
 ==================
 
-0.1.4 (unreleased)
+0.1.5 (unreleased)
 -------------------
 
 - Nothing yet
+
+0.1.4 (2018-05-05)
+-------------------
+
+- Add a new starter that combines zipkin and opentracing java spring cloud
 
 
 0.1.3 (2018-06-20)
