@@ -21,7 +21,8 @@ public abstract class AbstractZipkinTracerSenderSpringTest extends AbstractZipki
   protected void assertSenderUrl(String expected) {
     assertThat(getTracer())
         .extracting("brave4")
-        .extracting("reporter")
+        .extracting("spanReporter")
+        .extracting("delegate")
         .extracting("sender")
         .extracting("endpoint")
         .extracting("url")

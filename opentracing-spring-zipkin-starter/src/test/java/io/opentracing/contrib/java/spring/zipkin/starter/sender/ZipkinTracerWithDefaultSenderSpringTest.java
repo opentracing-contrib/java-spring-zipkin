@@ -21,8 +21,8 @@ import io.opentracing.contrib.java.spring.zipkin.starter.AbstractZipkinTracerSen
 import java.io.IOException;
 import java.util.List;
 import org.junit.Test;
-import zipkin.Span;
-import zipkin.junit.ZipkinRule;
+import zipkin2.Span;
+import zipkin2.junit.ZipkinRule;
 
 public class ZipkinTracerWithDefaultSenderSpringTest extends AbstractZipkinTracerSenderSpringTest {
 
@@ -42,7 +42,7 @@ public class ZipkinTracerWithDefaultSenderSpringTest extends AbstractZipkinTrace
     });
     List<Span> trace = zipkin.getTraces().get(0);
     assertEquals(1, trace.size());
-    assertEquals("bar", trace.get(0).name);
+    assertEquals("bar", trace.get(0).name());
     zipkin.shutdown();
   }
 

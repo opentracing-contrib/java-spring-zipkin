@@ -23,8 +23,8 @@ import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
 import org.junit.Test;
 import org.springframework.test.context.TestPropertySource;
-import zipkin.Span;
-import zipkin.junit.ZipkinRule;
+import zipkin2.Span;
+import zipkin2.junit.ZipkinRule;
 
 /**
  * @author Pavol Loffay
@@ -63,7 +63,7 @@ public class ZipkinSenderJsonV1Test extends AbstractZipkinTracerSenderSpringTest
     });
     List<Span> trace = zipkin.getTraces().get(0);
     assertEquals(1, trace.size());
-    assertEquals("bar", trace.get(0).name);
+    assertEquals("bar", trace.get(0).name());
     zipkin.shutdown();
   }
 }

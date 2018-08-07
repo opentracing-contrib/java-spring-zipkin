@@ -20,8 +20,7 @@ public abstract class AbstractZipkinTracerServiceNameTest extends AbstractZipkin
   protected void assertServiceName(String expected) {
     assertThat(getTracer())
         .extracting("brave4")
-        .extracting("recorder")
-        .extracting("spanMap")
+        .extracting("pendingSpanRecords")
         .extracting("endpoint")
         .extracting("serviceName")
         .containsOnly(expected);
