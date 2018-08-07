@@ -1,10 +1,10 @@
 Changes by Version
 ==================
 
-0.1.5 (unreleased)
+0.2.0 (2018-08-07)
 -------------------
 
-- Nothing yet
+- Update  Brave and Zipkin versions
 
 0.1.4 (2018-07-05)
 -------------------
