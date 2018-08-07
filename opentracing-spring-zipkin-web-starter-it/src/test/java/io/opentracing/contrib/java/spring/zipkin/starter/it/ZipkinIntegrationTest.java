@@ -33,8 +33,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import zipkin.Span;
-import zipkin.junit.ZipkinRule;
+import zipkin2.Span;
+import zipkin2.junit.ZipkinRule;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(
@@ -61,7 +61,7 @@ public class ZipkinIntegrationTest {
     await().atMost(10, TimeUnit.SECONDS).until(() -> zipkin.getTraces().size() == 1);
     final List<List<Span>> traces = zipkin.getTraces();
     final List<Span> spans = traces.get(0);
-    assertThat(spans.get(0).serviceNames()).containsExactly(SERVICE_NAME);
+    assertThat(spans.get(0).localServiceName()).isEqualTo(SERVICE_NAME);
   }
 
   //create the opentracing.zipkin properties from the information of the running container
