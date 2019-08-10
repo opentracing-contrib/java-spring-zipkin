@@ -1,5 +1,5 @@
 /**
- * Copyright 2018 The OpenTracing Authors
+ * Copyright 2018-2019 The OpenTracing Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -19,11 +19,12 @@ public abstract class AbstractZipkinTracerServiceNameTest extends AbstractZipkin
 
   protected void assertServiceName(String expected) {
     assertThat(getTracer())
-        .extracting("brave4")
-        .extracting("pendingSpanRecords")
-        .extracting("endpoint")
-        .extracting("serviceName")
-        .containsOnly(expected);
+            .extracting("delegate")
+            .extracting("finishedSpanHandler")
+            .extracting("delegate")
+            .extracting("converter")
+            .extracting("localServiceName")
+            .containsOnly(expected);
   }
 
 }
