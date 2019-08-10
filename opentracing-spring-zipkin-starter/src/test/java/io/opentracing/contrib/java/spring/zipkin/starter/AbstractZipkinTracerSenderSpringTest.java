@@ -1,5 +1,5 @@
 /**
- * Copyright 2018 The OpenTracing Authors
+ * Copyright 2018-2019 The OpenTracing Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -11,7 +11,6 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-
 package io.opentracing.contrib.java.spring.zipkin.starter;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,12 +19,13 @@ public abstract class AbstractZipkinTracerSenderSpringTest extends AbstractZipki
 
   protected void assertSenderUrl(String expected) {
     assertThat(getTracer())
-        .extracting("brave4")
-        .extracting("spanReporter")
-        .extracting("delegate")
-        .extracting("sender")
-        .extracting("endpoint")
-        .extracting("url")
-        .containsOnly(expected);
+            .extracting("delegate")
+            .extracting("finishedSpanHandler")
+            .extracting("delegate")
+            .extracting("spanReporter")
+            .extracting("sender")
+            .extracting("endpoint")
+            .extracting("url")
+            .containsOnly(expected);
   }
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright 2018 The OpenTracing Authors
+ * Copyright 2018-2019 The OpenTracing Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -25,7 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.util.EnvironmentTestUtils;
+import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -70,11 +70,13 @@ public class ZipkinIntegrationTest {
 
     @Override
     public void initialize(ConfigurableApplicationContext configurableApplicationContext) {
-      EnvironmentTestUtils
-          .addEnvironment("zipkinrule", configurableApplicationContext.getEnvironment(),
-              String.format("opentracing.zipkin.http-sender.baseUrl=%s", zipkin.httpUrl()),
-              String.format("spring.application.name=%s", SERVICE_NAME)
-      );
+      TestPropertyValues.of(String.format("opentracing.zipkin.http-sender.baseUrl=%s", zipkin.httpUrl()))
+          .and(String.format("spring.application.name=%s", SERVICE_NAME))
+          .applyTo(
+                  configurableApplicationContext.getEnvironment(),
+                  TestPropertyValues.Type.MAP,
+                  "zipkinrule"
+        );
     }
   }
 
