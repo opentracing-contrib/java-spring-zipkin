@@ -16,16 +16,27 @@ package io.opentracing.contrib.java.spring.zipkin.starter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 public abstract class AbstractZipkinTracerSenderSpringTest extends AbstractZipkinTracerSpringTest {
 
   protected void assertSenderUrl(String expected) {
-    assertThat(getTracer())
-        .extracting("brave4")
-        .extracting("spanReporter")
-        .extracting("delegate")
-        .extracting("sender")
-        .extracting("endpoint")
-        .extracting("url")
-        .containsOnly(expected);
+    try {
+
+      assertThat(getTracer())
+          .extracting("delegate")
+          .extracting("spanHandler")
+          .extracting("delegate")
+          .extracting("spanReporter")
+          .extracting("delegate")
+          .extracting("sender")
+          .extracting("endpoint")
+          .extracting("url")
+          .isEqualTo(new URL(expected));
+    } catch (MalformedURLException e) {
+      throw new RuntimeException(e.getMessage(), e);
+    }
+
   }
 }

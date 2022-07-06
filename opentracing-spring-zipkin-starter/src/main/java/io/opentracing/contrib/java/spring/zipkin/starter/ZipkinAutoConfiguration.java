@@ -37,6 +37,7 @@ import org.springframework.context.annotation.Configuration;
 import zipkin2.Span;
 import zipkin2.reporter.AsyncReporter;
 import zipkin2.reporter.Reporter;
+import zipkin2.reporter.brave.AsyncZipkinSpanHandler;
 import zipkin2.reporter.okhttp3.OkHttpSender;
 
 @Configuration
@@ -56,22 +57,26 @@ public class ZipkinAutoConfiguration {
   @Bean
   @ConditionalOnMissingBean
   public io.opentracing.Tracer tracer(Reporter<Span> reporter, Sampler sampler) {
-
     final Tracing.Builder builder = Tracing.newBuilder()
         .sampler(sampler)
         .localServiceName(serviceName)
-        .spanReporter(reporter);
-
+        //#10 Replace the deprecated spanReporter with the recommended addSpanHandler
+        .addSpanHandler(AsyncZipkinSpanHandler.create(reporter));
     tracerCustomizers.forEach(c -> c.customize(builder));
-
     return BraveTracer.create(builder.build());
   }
 
   @Bean
+  public TracerDisposable tracerDisposable(io.opentracing.Tracer tracer) {
+    return new TracerDisposable(tracer);
+  }
+
+  @Bean
   @ConditionalOnMissingBean
-  public Reporter<Span> reporter(ZipkinConfigurationProperties properties) {
+  public AsyncReporter<Span> reporter(ZipkinConfigurationProperties properties) {
     String url = properties.getHttpSender().getBaseUrl();
-    if (properties.getHttpSender().getEncoder().equals(JSON_V2) || properties.getHttpSender().getEncoder().equals(PROTO3)) {
+    if (properties.getHttpSender().getEncoder().equals(JSON_V2) || properties.getHttpSender()
+        .getEncoder().equals(PROTO3)) {
       url += (url.endsWith("/") ? "" : "/") + "api/v2/spans";
     } else if (properties.getHttpSender().getEncoder().equals(JSON_V1)) {
       url += (url.endsWith("/") ? "" : "/") + "api/v1/spans";
@@ -79,8 +84,13 @@ public class ZipkinAutoConfiguration {
     OkHttpSender sender = OkHttpSender.newBuilder()
         .endpoint(url)
         .encoding(properties.getHttpSender().getEncoder().encoding())
+        .connectTimeout(properties.getHttpSender().getConnectTimeout())
+        .compressionEnabled(properties.getHttpSender().isCompressionEnabled())
+        .maxRequests(properties.getHttpSender().getMaxRequests())
+        .messageMaxBytes(properties.getHttpSender().getMessageMaxBytes())
+        .readTimeout(properties.getHttpSender().getReadTimeout())
+        .writeTimeout(properties.getHttpSender().getWriteTimeout())
         .build();
-
     return AsyncReporter.builder(sender).build(properties.getHttpSender().getEncoder());
   }
 

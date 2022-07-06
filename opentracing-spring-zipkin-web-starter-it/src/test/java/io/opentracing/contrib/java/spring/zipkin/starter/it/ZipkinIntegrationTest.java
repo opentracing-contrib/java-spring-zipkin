@@ -16,7 +16,9 @@ package io.opentracing.contrib.java.spring.zipkin.starter.it;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.awaitility.Awaitility.await;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -25,10 +27,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.util.EnvironmentTestUtils;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.core.env.MapPropertySource;
+import org.springframework.core.env.MutablePropertySources;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -70,11 +73,14 @@ public class ZipkinIntegrationTest {
 
     @Override
     public void initialize(ConfigurableApplicationContext configurableApplicationContext) {
-      EnvironmentTestUtils
-          .addEnvironment("zipkinrule", configurableApplicationContext.getEnvironment(),
-              String.format("opentracing.zipkin.http-sender.baseUrl=%s", zipkin.httpUrl()),
-              String.format("spring.application.name=%s", SERVICE_NAME)
-      );
+      MutablePropertySources mutablePropertySources = configurableApplicationContext
+          .getEnvironment()
+          .getPropertySources();
+      //Replace the deleted EnvironmentTestUtils#addEnvironment with the following logic
+      Map<String, Object> properties = new HashMap<>();
+      properties.put("opentracing.zipkin.http-sender.baseUrl", zipkin.httpUrl());
+      properties.put("spring.application.name", SERVICE_NAME);
+      mutablePropertySources.addLast(new MapPropertySource("zipkinrule", properties));
     }
   }
 

@@ -21,6 +21,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import zipkin2.Span;
 import zipkin2.reporter.AsyncReporter;
+import zipkin2.reporter.Reporter;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {
@@ -30,6 +31,7 @@ public abstract class AbstractZipkinTracerSpringTest {
 
   @Autowired(required = false)
   protected Tracer tracer;
+
 
   @Autowired(required = false)
   protected AsyncReporter<Span> reporter;

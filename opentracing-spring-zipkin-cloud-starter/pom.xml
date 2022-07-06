@@ -14,34 +14,36 @@
     the License.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>io.opentracing.contrib</groupId>
-        <artifactId>opentracing-spring-zipkin-parent</artifactId>
-        <version>0.2.1-SNAPSHOT</version>
-    </parent>
+  <parent>
+    <groupId>io.opentracing.contrib</groupId>
+    <artifactId>opentracing-spring-zipkin-parent</artifactId>
+    <version>0.2.2-SNAPSHOT</version>
+  </parent>
 
-    <artifactId>opentracing-spring-zipkin-cloud-starter</artifactId>
+  <artifactId>opentracing-spring-zipkin-cloud-starter</artifactId>
 
-    <properties>
-        <main.basedir>${project.basedir}/..</main.basedir>
-        <opentracing-spring-cloud-starter.version>0.1.15</opentracing-spring-cloud-starter.version>
-    </properties>
+  <properties>
+    <main.basedir>${project.basedir}/..</main.basedir>
+    <opentracing-spring-cloud-starter.version>0.5.8</opentracing-spring-cloud-starter.version>
+  </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>opentracing-spring-zipkin-starter</artifactId>
-        </dependency>
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>opentracing-spring-zipkin-starter</artifactId>
+    </dependency>
 
-        <dependency>
-            <groupId>io.opentracing.contrib</groupId>
-            <artifactId>opentracing-spring-cloud-starter</artifactId>
-            <version>${opentracing-spring-cloud-starter.version}</version>
-        </dependency>
-    </dependencies>
+    <dependency>
+      <groupId>io.opentracing.contrib</groupId>
+      <artifactId>opentracing-spring-cloud-starter</artifactId>
+      <version>${opentracing-spring-cloud-starter.version}</version>
+    </dependency>
+  </dependencies>
 
 
 </project>
