@@ -50,11 +50,102 @@ public class ZipkinConfigurationProperties {
     return countingSampler;
   }
 
+
   public static class HttpSender {
+
     /**
      * Zipkin base URL without endpoint e.g. /api/v2/spans
      */
     private String baseUrl = "http://localhost:9411/";
+    /**
+     * Sets the default connect timeout (in milliseconds) for new connections. Default 10000
+     *
+     * @since 1.0.2
+     */
+    private int connectTimeout = 10000;
+
+    /**
+     * Default true. true implies that spans will be gzipped before transport
+     *
+     * @since 1.0.2
+     */
+    private boolean compressionEnabled = true;
+
+    /**
+     * Maximum in-flight requests. Default 64
+     *
+     * @since 1.0.2
+     */
+    private int maxRequests = 64;
+
+    /**
+     * Maximum size of a message. Default 500KB
+     *
+     * @since 1.0.2
+     */
+    private int messageMaxBytes = 500_000;
+
+    /**
+     * Sets the default read timeout (in milliseconds) for new connections. Default 10000
+     *
+     * @since 1.0.2
+     */
+    private int readTimeout = 1000;
+
+    /**
+     * Sets the default write timeout (in milliseconds) for new connections. Default 10000
+     *
+     * @since 1.0.2
+     */
+    private int writeTimeout = 10000;
+
+    public int getConnectTimeout() {
+      return connectTimeout;
+    }
+
+    public void setConnectTimeout(int connectTimeout) {
+      this.connectTimeout = connectTimeout;
+    }
+
+    public boolean isCompressionEnabled() {
+      return compressionEnabled;
+    }
+
+    public void setCompressionEnabled(boolean compressionEnabled) {
+      this.compressionEnabled = compressionEnabled;
+    }
+
+    public int getMaxRequests() {
+      return maxRequests;
+    }
+
+    public void setMaxRequests(int maxRequests) {
+      this.maxRequests = maxRequests;
+    }
+
+    public int getMessageMaxBytes() {
+      return messageMaxBytes;
+    }
+
+    public void setMessageMaxBytes(int messageMaxBytes) {
+      this.messageMaxBytes = messageMaxBytes;
+    }
+
+    public int getReadTimeout() {
+      return readTimeout;
+    }
+
+    public void setReadTimeout(int readTimeout) {
+      this.readTimeout = readTimeout;
+    }
+
+    public int getWriteTimeout() {
+      return writeTimeout;
+    }
+
+    public void setWriteTimeout(int writeTimeout) {
+      this.writeTimeout = writeTimeout;
+    }
 
     public String getBaseUrl() {
       return baseUrl;
@@ -65,8 +156,8 @@ public class ZipkinConfigurationProperties {
     }
 
     /**
-     * Encoding of spans sent to Zipkin server. Use {@link SpanBytesEncoder#JSON_V1} if you are using
-     * older server.
+     * Encoding of spans sent to Zipkin server. Use {@link SpanBytesEncoder#JSON_V1} if you are
+     * using older server.
      */
     private SpanBytesEncoder encoder = SpanBytesEncoder.JSON_V2;
 
